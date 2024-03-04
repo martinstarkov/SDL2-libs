@@ -55,17 +55,7 @@ set(SDL2TEST_LIBRARY    SDL2::SDL2test)
 # All targets are created, even when some might not be requested though COMPONENTS.
 # This is done for compatibility with CMake generated SDL2-target.cmake files.
 
-set(_sdl2_libraries_in "-mwindows")
-set(_sdl2_static_private_libs_in " -Wl,--dynamicbase -Wl,--nxcompat -Wl,--high-entropy-va -lm -ldinput8 -ldxguid -ldxerr8 -luser32 -lgdi32 -lwinmm -limm32 -lole32 -loleaut32 -lshell32 -lsetupapi -lversion -luuid")
-
-# Convert _sdl2_libraries to list and keep only libraries + library directories
-string(REGEX MATCHALL "-[lm]([-a-zA-Z0-9._]+)" _sdl2_libraries "${_sdl2_libraries_in}")
-string(REGEX REPLACE "^-l" "" _sdl2_libraries "${_sdl2_libraries}")
-string(REGEX REPLACE ";-l" ";" _sdl2_libraries "${_sdl2_libraries}")
-string(REGEX MATCHALL "-L([-a-zA-Z0-9._/]+)" _sdl2_libdirs "${_sdl2_libraries_in}")
-string(REGEX REPLACE "^-L" "" _sdl2_libdirs "${_sdl2_libdirs}")
-string(REGEX REPLACE ";-L" ";" _sdl2_libdirs "${_sdl2_libdirs}")
-list(APPEND _sdl2_libdirs "${SDL2_LIBDIR}")
+set(_sdl2_static_private_libs_in " -Wl,--dynamicbase -Wl,--nxcompat -Wl,--high-entropy-va -ldinput8 -ldxguid -luser32 -lgdi32 -lwinmm -limm32 -lole32 -loleaut32 -lshell32 -lsetupapi -lversion -luuid")
 
 # Convert _sdl2_static_private_libs to list and keep only libraries + library directories
 string(REGEX MATCHALL "(-[lm]([-a-zA-Z0-9._]+))|(-Wl,[^ ]*framework[^ ]*)|(-pthread)" _sdl2_static_private_libs "${_sdl2_static_private_libs_in}")
@@ -85,8 +75,8 @@ if(EXISTS "${_sdl2_library}")
       PROPERTIES
       IMPORTED_LOCATION "${_sdl2_library}"
       INTERFACE_INCLUDE_DIRECTORIES "${SDL2_INCLUDE_DIRS}"
-      INTERFACE_LINK_LIBRARIES "${_sdl2_link_libraries};${_sdl2_static_private_libs}"
-      INTERFACE_LINK_DIRECTORIES "${_sdl2_libdirs};${_sdl2_static_private_libdirs}"
+      INTERFACE_LINK_LIBRARIES "${_sdl2_static_private_libs}"
+      INTERFACE_LINK_DIRECTORIES "${_sdl2_static_private_libdirs}"
       IMPORTED_LINK_INTERFACE_LANGUAGES "C"
       COMPATIBLE_INTERFACE_STRING "SDL_VERSION"
       INTERFACE_SDL_VERSION "SDL2"
