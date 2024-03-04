@@ -48,7 +48,7 @@ set(SDL2_INCLUDE_DIRS           "${SDL2_INCLUDE_DIR}")
 set_and_check(SDL2_BINDIR       "${SDL2_PREFIX}/lib/${_sdl_arch_subdir}")
 set_and_check(SDL2_LIBDIR       "${SDL2_PREFIX}/lib/${_sdl_arch_subdir}")
 
-set(SDL2_LIBRARIES      SDL2::SDL2main SDL2::SDL2)
+set(SDL2_LIBRARIES      SDL2::SDL2main SDL2::SDL2-static)
 set(SDL2MAIN_LIBRARY    SDL2::SDL2main)
 set(SDL2TEST_LIBRARY    SDL2::SDL2test)
 
@@ -69,9 +69,9 @@ set(_sdl2_link_libraries ${_sdl2_libraries})
 
 set(_sdl2_library "${SDL2_LIBDIR}/SDL2.lib")
 if(EXISTS "${_sdl2_library}")
-  if(NOT TARGET SDL2::SDL2)
-    add_library(SDL2::SDL2 STATIC IMPORTED)
-    set_target_properties(SDL2::SDL2
+  if(NOT TARGET SDL2::SDL2-static)
+    add_library(SDL2::SDL2-static STATIC IMPORTED)
+    set_target_properties(SDL2::SDL2-static
       PROPERTIES
       IMPORTED_LOCATION "${_sdl2_library}"
       INTERFACE_INCLUDE_DIRECTORIES "${SDL2_INCLUDE_DIRS}"
@@ -87,14 +87,6 @@ else()
   set(SDL2_SDL2_FOUND FALSE)
 endif()
 unset(_sdl2_library)
-
-
-
-
-
-
-
-
 
 set(_sdl2main_library "${SDL2_LIBDIR}/SDL2main.lib")
 if(EXISTS "${_sdl2main_library}")
