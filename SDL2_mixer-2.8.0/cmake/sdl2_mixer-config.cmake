@@ -60,7 +60,7 @@ set(_sdl2mixer_dll          "${CMAKE_CURRENT_LIST_DIR}/../lib/${_sdl_arch_subdir
 # All targets are created, even when some might not be requested though COMPONENTS.
 # This is done for compatibility with CMake generated SDL2_mixer-target.cmake files.
 
-set(_sdl2mixer_extra_static_libraries " -lwinmm -lm  -lwinmm")
+set(_sdl2mixer_extra_static_libraries " -lwinmm")
 string(STRIP "${_sdl2mixer_extra_static_libraries}" _sdl2mixer_extra_static_libraries)
 
 # Convert _sdl2mixer_extra_static_libraries to list and keep only libraries
