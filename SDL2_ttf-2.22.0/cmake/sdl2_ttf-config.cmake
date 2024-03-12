@@ -30,7 +30,7 @@ set(_sdl2ttf_incdir       "${CMAKE_CURRENT_LIST_DIR}/../include")
 set(_sdl2ttf_library      "${CMAKE_CURRENT_LIST_DIR}/../lib/${_sdl_arch_subdir}/SDL2_ttf.lib")
 set(_sdl2ttf_dll          "${CMAKE_CURRENT_LIST_DIR}/../lib/${_sdl_arch_subdir}/SDL2_ttf.dll")
 
-set(_sdl2ttf_extra_static_libraries " -lusp10 -lgdi32 -lrpcrt4  -lusp10 -lgdi32 -lrpcrt4 -lfreetype")
+set(_sdl2ttf_extra_static_libraries " -lusp10 -lgdi32 -lrpcrt4  -lusp10 -lgdi32 -lrpcrt4")
 string(STRIP "${_sdl2ttf_extra_static_libraries}" _sdl2ttf_extra_static_libraries)
 
 # Convert _sdl2ttf_extra_static_libraries to list and keep only libraries
